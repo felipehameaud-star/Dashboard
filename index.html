@@ -184,9 +184,9 @@ function processCSV(text){
   const sep=detectSep(lines[0]);
   const headers=splitLine(lines[0],sep).map(h=>h.toUpperCase().replace(/[^A-Z0-9ÁÉÍÓÚ ]/gi,' ').trim());
   const find=keys=>headers.findIndex(h=>keys.some(k=>h.includes(k)));
-  const iM=find(['MES','MONTH','FECHA','PERIODO','PERIOD','DATE']);
-  const iB=find(['MARCA','BRAND','PRODUCTO','PRODUCT','ARTICULO','ITEM']);
-  const iV=find(['VENTA','IMPORTE','MONTO','SALES','VALOR','AMOUNT','REVENUE','TOTAL','NET']);
+  const iM=find(['MES','MONTH','FECHA','PERIODO','PERIOD','DATE','RPT_FECHA','RPT FECHA']);
+  const iB=find(['MARCA','BRAND','PRODUCTO','PRODUCT','ARTICULO','ITEM','ARTMARCCOD','ARTMARCACOD','ARTMARC']);
+  const iV=find(['VENTA','IMPORTE','MONTO','SALES','VALOR','AMOUNT','REVENUE','TOTAL','NET','VTANMONLOC','VTABMONLOC','IMPMONLOC']);
   const iC=find(['CANAL','CHANNEL','TIPO']);
   const iZ=find(['ZONA','ZONE','REGION','TERRITORIO']);
   if(iM<0)return{ok:false,msg:`Columna MES no encontrada. Encabezados: ${headers.join(' | ')}`};
