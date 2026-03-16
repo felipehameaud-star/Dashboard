@@ -143,7 +143,7 @@ textarea.paste-area{width:100%;height:140px;background:var(--bg0);border:1px sol
 <div class="shell" id="app"></div>
 <script>
 let SHEETS_CSV_URL = (() => { try { return localStorage.getItem('sheets_url') || ''; } catch(e) { return ''; } })();
-const COL_MAP={fecha:'RPT_Fecha',anio:'AA',mes:'MM',marca:'ArtMarcCod',venta:'VtaNMonLoc',canal:'CliEntCarteraCod',zona:'CliEntFinZona'};
+const COL_MAP={fecha:'RPT_Fecha',anio:'AA',mes:'MM',marca:'ArtMarcaCod',venta:'VtaNMonLoc',canal:'CliEntCarteraCod',zona:'CliEntFinZona'};
 const CANAL_MAP={'FARMACIA':'FARMACIA','MUTUAL':'MUTUALES','MUTUALES':'MUTUALES','ESTADO':'ESTADO','GOBIERNO':'ESTADO','INSTITUCIONAL':'ESTADO'};
 
 const MONTHLY={"2024-01":{"ACTIVOX":10741,"ANTIAX":912746,"C-VIT":281702,"CIRUELAX":3952808,"DERMOBB":59705,"DOLEX":4996489,"FRAMINTROL":26133,"LACRIMAX":325763,"MEGA OMEGA":2267696,"MICOLIS":1012863,"OMEGA 3":986664,"PIOSAN":269695,"PRO FEMME":67850,"UMBRELLA":2728283,"WEB-C":788826},"2024-02":{"ACTIVOX":377028,"ANTIAX":1563066,"C-VIT":511584,"CIRUELAX":3022266,"DERMOBB":28304,"DOLEX":9752817,"FRAMINTROL":22835,"LACRIMAX":497326,"MEGA OMEGA":2485456,"MICOLIS":1709281,"OMEGA 3":996466,"PIOSAN":232102,"PRO FEMME":6803,"UMBRELLA":1857898,"WEB-C":3320355},"2024-03":{"ACTIVOX":200509,"ANTIAX":942728,"C-VIT":349897,"CIRUELAX":3468661,"DERMOBB":40179,"DOLEX":8815106,"FRAMINTROL":19780,"LACRIMAX":551226,"MEGA OMEGA":2145700,"MICOLIS":1804597,"OMEGA 3":891994,"PIOSAN":838979,"PRO FEMME":227974,"UMBRELLA":622663,"WEB-C":3300761},"2024-04":{"ACTIVOX":65525,"ANTIAX":554350,"C-VIT":140357,"CIRUELAX":3923138,"DERMOBB":117297,"DOLEX":7489901,"FRAMINTROL":50230,"LACRIMAX":622937,"MEGA OMEGA":2565609,"MICOLIS":1575902,"OMEGA 3":1163873,"PIOSAN":413395,"PRO FEMME":248577,"UMBRELLA":587355,"WEB-C":1542550},"2024-05":{"ACTIVOX":173469,"ANTIAX":1853532,"C-VIT":484966,"CIRUELAX":3817895,"DERMOBB":87511,"DOLEX":7019269,"FRAMINTROL":-16407,"LACRIMAX":459205,"MEGA OMEGA":3334706,"MICOLIS":1652821,"OMEGA 3":1106906,"PIOSAN":248185,"PRO FEMME":62011,"UMBRELLA":35358,"WEB-C":2303824},"2024-06":{"ACTIVOX":424279,"ANTIAX":1243945,"C-VIT":428920,"CIRUELAX":3150349,"DERMOBB":13078,"DOLEX":10861065,"LACRIMAX":-13196,"MEGA OMEGA":2522442,"MICOLIS":1502368,"OMEGA 3":1164027,"PIOSAN":336409,"PRO FEMME":281745,"UMBRELLA":467875,"WEB-C":3167091},"2024-07":{"ACTIVOX":423876,"ANTIAX":1226496,"C-VIT":208043,"CIRUELAX":3781989,"DERMOBB":-14115,"DOLEX":7909017,"LACRIMAX":851,"MEGA OMEGA":2451616,"MICOLIS":1645944,"OMEGA 3":967885,"PIOSAN":297562,"PRO FEMME":188742,"UMBRELLA":263139,"WEB-C":1620065},"2024-08":{"ACTIVOX":106356,"ANTIAX":1046654,"C-VIT":173088,"CIRUELAX":2766207,"DERMOBB":-1259,"DOLEX":7281709,"FRAMINTROL":-22584,"LACRIMAX":1289277,"MEGA OMEGA":3934539,"MICOLIS":2766298,"OMEGA 3":1124925,"PIOSAN":175768,"PRO FEMME":179252,"UMBRELLA":1330781,"WEB-C":1024246},"2024-09":{"ACTIVOX":54509,"ANTIAX":2215506,"C-VIT":167181,"CIRUELAX":3627858,"DERMOBB":-1538,"DOLEX":7108351,"FRAMINTROL":-6388,"LACRIMAX":506155,"MEGA OMEGA":2698437,"MICOLIS":1574870,"OMEGA 3":1061710,"PIOSAN":200068,"PRO FEMME":213490,"UMBRELLA":4095152,"WEB-C":1137644},"2024-10":{"ACTIVOX":49193,"ANTIAX":865446,"C-VIT":122285,"CIRUELAX":3850012,"DERMOBB":-6357,"DOLEX":7660544,"FRAMINTROL":-26846,"LACRIMAX":572214,"MEGA OMEGA":2585682,"MICOLIS":1833968,"OMEGA 3":1373258,"PIOSAN":230548,"PRO FEMME":172028,"UMBRELLA":6093023,"WEB-C":546895},"2024-11":{"ACTIVOX":35596,"ANTIAX":1471751,"C-VIT":125546,"CIRUELAX":4672706,"DERMOBB":-1734,"DOLEX":6904278,"FRAMINTROL":-10716,"LACRIMAX":761086,"MEGA OMEGA":3452596,"MICOLIS":2146347,"OMEGA 3":1201464,"PIOSAN":223968,"PRO FEMME":180822,"UMBRELLA":6727850,"WEB-C":376176},"2024-12":{"ACTIVOX":16172,"ANTIAX":817270,"C-VIT":86084,"CIRUELAX":3167666,"DERMOBB":-140,"DOLEX":4861916,"FRAMINTROL":-51468,"LACRIMAX":651428,"MEGA OMEGA":2454017,"MICOLIS":1727085,"OMEGA 3":511524,"PIOSAN":221489,"PRO FEMME":172733,"UMBRELLA":6476380,"WEB-C":379445},"2025-01":{"ACTIVOX":22257,"ANTIAX":631079,"C-VIT":116035,"CIRUELAX":2994375,"DOLEX":5244214,"LACRIMAX":715801,"MEGA OMEGA":1708068,"MICOLIS":1522013,"OMEGA 3":1488409,"PIOSAN":352800,"PRO FEMME":272955,"UMBRELLA":2336950,"WEB-C":435183},"2025-02":{"ACTIVOX":419916,"ANTIAX":1216461,"C-VIT":732056,"CIRUELAX":2823715,"DOLEX":11434609,"LACRIMAX":640827,"MEGA OMEGA":2488636,"MICOLIS":1557565,"OMEGA 3":1307818,"PIOSAN":590903,"PRO FEMME":213408,"UMBRELLA":2227411,"WEB-C":2790628},"2025-03":{"ACTIVOX":526313,"ANTIAX":1267449,"C-VIT":342133,"CIRUELAX":4005529,"DOLEX":10416567,"LACRIMAX":940831,"MEGA OMEGA":3269297,"MICOLIS":1553354,"OMEGA 3":1377312,"PIOSAN":529649,"PRO FEMME":331076,"UMBRELLA":570856,"WEB-C":3624166},"2025-04":{"ACTIVOX":184842,"ANTIAX":1142283,"C-VIT":420702,"CIRUELAX":4447288,"DOLEX":8563720,"LACRIMAX":630961,"MEGA OMEGA":3186767,"MICOLIS":1460208,"OMEGA 3":1117889,"PIOSAN":534573,"PRO FEMME":200619,"UMBRELLA":797866,"WEB-C":3165648},"2025-05":{"ACTIVOX":-1570,"ANTIAX":1105788,"C-VIT":190291,"CIRUELAX":2953212,"DOLEX":6840864,"LACRIMAX":520639,"MEGA OMEGA":1751660,"MICOLIS":1568604,"OMEGA 3":1259596,"PIOSAN":314560,"PRO FEMME":149706,"UMBRELLA":17958,"WEB-C":1369459},"2025-06":{"ACTIVOX":738095,"ANTIAX":1312416,"C-VIT":284197,"CIRUELAX":5442878,"DOLEX":8623620,"LACRIMAX":504749,"MEGA OMEGA":3650488,"MICOLIS":1698324,"OMEGA 3":1275708,"PIOSAN":232665,"PRO FEMME":293524,"UMBRELLA":1013037,"WEB-C":1820929},"2025-07":{"ACTIVOX":403362,"ANTIAX":1200565,"C-VIT":377780,"CIRUELAX":4670693,"DOLEX":10213835,"LACRIMAX":582151,"MEGA OMEGA":3561753,"MICOLIS":1974562,"OMEGA 3":1271820,"PIOSAN":237146,"PRO FEMME":279048,"UMBRELLA":176975,"WEB-C":2154784},"2025-08":{"ACTIVOX":110189,"ANTIAX":1714084,"C-VIT":231682,"CIRUELAX":3652442,"DOLEX":9216580,"LACRIMAX":747618,"MEGA OMEGA":2102875,"MICOLIS":2496225,"OMEGA 3":1319504,"PIOSAN":208790,"PRO FEMME":219049,"UMBRELLA":1002282,"WEB-C":2212730},"2025-09":{"ACTIVOX":66595,"ANTIAX":2437927,"C-VIT":172144,"CIRUELAX":5532069,"DOLEX":8380050,"LACRIMAX":877795,"MEGA OMEGA":7358061,"MICOLIS":2937286,"OMEGA 3":1369864,"PIOSAN":235546,"PRO FEMME":269339,"UMBRELLA":4628603,"WEB-C":869545,"ZEROACNE":368206},"2025-10":{"ACTIVOX":108894,"ANTIAX":987564,"C-VIT":226979,"CIRUELAX":3691581,"DOLEX":9525811,"LACRIMAX":1062097,"MEGA OMEGA":2756958,"MICOLIS":1898670,"OMEGA 3":1230877,"PIOSAN":303712,"PRO FEMME":263716,"UMBRELLA":6215590,"WEB-C":1060220,"ZEROACNE":235485},"2025-11":{"ACTIVOX":31403,"ANTIAX":1147864,"C-VIT":329890,"CIRUELAX":4154702,"DOLEX":7416380,"LACRIMAX":659493,"MEGA OMEGA":2646009,"MICOLIS":1774590,"OMEGA 3":1417228,"PIOSAN":269376,"PRO FEMME":270397,"QUELAT":685382,"UMBRELLA":5166994,"WEB-C":305794,"ZEROACNE":275280},"2025-12":{"ACTIVOX":22747,"ANTIAX":1311337,"C-VIT":122725,"CIRUELAX":4327095,"DOLEX":4867361,"LACRIMAX":829019,"MEGA OMEGA":2481068,"MICOLIS":1850083,"OMEGA 3":1063906,"PIOSAN":196175,"PRO FEMME":207943,"QUELAT":195654,"UMBRELLA":7525274,"WEB-C":195782,"ZEROACNE":40047},"2026-01":{"ACTIVOX":17084,"ANTIAX":300058,"C-VIT":103557,"CIRUELAX":4050749,"DOLEX":6089880,"LACRIMAX":323864,"MEGA OMEGA":2274061,"MICOLIS":1637734,"OMEGA 3":671865,"PIOSAN":208175,"PRO FEMME":229737,"QUELAT":124649,"UMBRELLA":2376025,"WEB-C":249463,"ZEROACNE":12346},"2026-02":{"ACTIVOX":387625,"ANTIAX":1007429,"C-VIT":583026,"CIRUELAX":3206559,"DOLEX":13495605,"LACRIMAX":1398978,"MEGA OMEGA":2321453,"MICOLIS":1531411,"OMEGA 3":1645098,"PIOSAN":68631,"PRO FEMME":205354,"QUELAT":391575,"UMBRELLA":2133467,"WEB-C":3511701,"ZEROACNE":149177},"2026-03":{"ACTIVOX":90591,"ANTIAX":727514,"C-VIT":149722,"CIRUELAX":1550882,"DOLEX":5730061,"LACRIMAX":357776,"MEGA OMEGA":1360442,"MICOLIS":534164,"OMEGA 3":432410,"PIOSAN":186658,"PRO FEMME":84496,"QUELAT":81999,"UMBRELLA":-83420,"WEB-C":903732,"ZEROACNE":42745}};
@@ -180,15 +180,41 @@ function normMonth(raw){if(!raw)return null;const s=String(raw).trim();if(/^\d{4
 function processCSV(text){
   if(!text||!text.trim())return{ok:false,msg:'El texto está vacío.'};
   const lines=text.split('\n').map(l=>l.replace(/\r$/,'')).filter(l=>l.trim());
-  if(lines.length<2)return{ok:false,msg:'Se necesitan al menos 2 filas (encabezado + datos).'};
+  if(lines.length<2)return{ok:false,msg:'Se necesitan al menos 2 filas.'};
   const sep=detectSep(lines[0]);
-  const headers=splitLine(lines[0],sep).map(h=>h.toUpperCase().replace(/[^A-Z0-9ÁÉÍÓÚ ]/gi,' ').trim());
+  const headers=splitLine(lines[0],sep).map(h=>h.toUpperCase().trim());
+
+  // ── Formato agrupado (TIPO, MES, DIMENSION, VENTA) ──
+  if(headers.includes('TIPO')&&headers.includes('DIMENSION')){
+    const iTIPO=headers.indexOf('TIPO');
+    const iMES=headers.indexOf('MES');
+    const iDIM=headers.indexOf('DIMENSION');
+    const iVTA=headers.indexOf('VENTA');
+    const nm={},nch={},nz={};let ok=0;
+    for(let i=1;i<lines.length;i++){
+      const r=splitLine(lines[i],sep);
+      const tipo=(r[iTIPO]||'').trim().toUpperCase();
+      const mes=normMonth(r[iMES]);
+      const dim=(r[iDIM]||'').trim().toUpperCase();
+      const venta=parseNum(r[iVTA]);
+      if(!mes||!dim)continue;
+      if(tipo==='MARCA'){if(!nm[mes])nm[mes]={};nm[mes][dim]=(nm[mes][dim]||0)+venta;ok++;}
+      else if(tipo==='CANAL'){if(!nch[mes])nch[mes]={};nch[mes][dim]=(nch[mes][dim]||0)+venta;}
+      else if(tipo==='ZONA'){if(!nz[mes])nz[mes]={};nz[mes][dim]=(nz[mes][dim]||0)+venta;}
+    }
+    const mCount=Object.keys(nm).length,bCount=[...new Set(Object.values(nm).flatMap(x=>Object.keys(x)))].length;
+    if(mCount===0)return{ok:false,msg:'No se encontraron datos válidos.'};
+    return{ok:true,msg:`✅ ${ok} registros · ${mCount} meses · ${bCount} marcas`,
+      data:{monthly:nm,monthlyCh:Object.keys(nch).length?nch:MONTHLY_CH,monthlyZ:Object.keys(nz).length?nz:MONTHLY_Z}};
+  }
+
+  // ── Formato plano (MES, MARCA, VENTA, CANAL, ZONA) ──
   const find=keys=>headers.findIndex(h=>keys.some(k=>h.includes(k)));
-  const iM=find(['MES','MONTH','FECHA','PERIODO','PERIOD','DATE','RPT_FECHA','RPT FECHA']);
-  const iB=find(['MARCA','BRAND','PRODUCTO','PRODUCT','ARTICULO','ITEM','ARTMARCCOD','ARTMARCACOD','ARTMARC']);
-  const iV=find(['VENTA','IMPORTE','MONTO','SALES','VALOR','AMOUNT','REVENUE','TOTAL','NET','VTANMONLOC','VTABMONLOC','IMPMONLOC']);
-  const iC=find(['CANAL','CHANNEL','TIPO']);
-  const iZ=find(['ZONA','ZONE','REGION','TERRITORIO']);
+  const iM=find(['MES','MONTH','FECHA','PERIODO','DATE','RPT_FECHA']);
+  const iB=find(['MARCA','BRAND','PRODUCTO','ARTMARCACOD','ARTMARCCOD']);
+  const iV=find(['VENTA','IMPORTE','MONTO','SALES','VTANMONLOC','VTABMONLOC']);
+  const iC=find(['CANAL','CHANNEL','TIPO','CLIENTCARTERACOD']);
+  const iZ=find(['ZONA','ZONE','REGION','CLIENTFINZONA']);
   if(iM<0)return{ok:false,msg:`Columna MES no encontrada. Encabezados: ${headers.join(' | ')}`};
   if(iB<0)return{ok:false,msg:`Columna MARCA no encontrada. Encabezados: ${headers.join(' | ')}`};
   if(iV<0)return{ok:false,msg:`Columna VENTA no encontrada. Encabezados: ${headers.join(' | ')}`};
@@ -198,12 +224,13 @@ function processCSV(text){
     const mes=normMonth(r[iM]),brand=(r[iB]||'').trim().toUpperCase(),venta=parseNum(r[iV]);
     if(!mes||!brand){skip++;continue;}
     if(!nm[mes])nm[mes]={};nm[mes][brand]=(nm[mes][brand]||0)+venta;ok++;
-    if(iC>=0){const raw=(r[iC]||'').trim().toUpperCase();const canal=raw.includes('FARM')?'FARMACIA':raw.includes('MUT')?'MUTUALES':raw.includes('EST')?'ESTADO':raw;if(canal){if(!nch[mes])nch[mes]={};nch[mes][canal]=(nch[mes][canal]||0)+venta;}}
+    if(iC>=0){const raw=(r[iC]||'').trim().toUpperCase();if(raw){if(!nch[mes])nch[mes]={};nch[mes][raw]=(nch[mes][raw]||0)+venta;}}
     if(iZ>=0){const zona=(r[iZ]||'').trim().toUpperCase();if(zona){if(!nz[mes])nz[mes]={};nz[mes][zona]=(nz[mes][zona]||0)+venta;}}
   }
   const mCount=Object.keys(nm).length,bCount=[...new Set(Object.values(nm).flatMap(x=>Object.keys(x)))].length;
-  if(mCount===0)return{ok:false,msg:`Se procesaron ${ok} filas pero ningún mes resultó válido. Formato esperado: YYYY-MM.`};
-  return{ok:true,msg:`✅ ${ok} filas · ${mCount} meses · ${bCount} marcas${skip?` · ${skip} omitidas`:''}`,data:{monthly:nm,monthlyCh:Object.keys(nch).length?nch:MONTHLY_CH,monthlyZ:Object.keys(nz).length?nz:MONTHLY_Z}};
+  if(mCount===0)return{ok:false,msg:`Sin meses válidos. Encabezados: ${headers.join(' | ')}`};
+  return{ok:true,msg:`✅ ${ok} filas · ${mCount} meses · ${bCount} marcas${skip?` · ${skip} omitidas`:''}`,
+    data:{monthly:nm,monthlyCh:Object.keys(nch).length?nch:MONTHLY_CH,monthlyZ:Object.keys(nz).length?nz:MONTHLY_Z}};
 }
 
 // ── CHARTS ──
